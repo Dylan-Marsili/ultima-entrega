@@ -59,7 +59,13 @@ def login_request(request):
     form = AuthenticationForm()
 
     return render(request, "AppBlog/login.html", {"form": form})
+class UsuarioEdicion(UpdateView):
+    form_class = Profile
+    template_name= 'AppBlog/profile.html'
+    success_url = reverse_lazy('inicio')
 
+    def get_object(self):
+        return self.request.user
 def register_request(request):
     if request.method == 'POST':
 
@@ -83,40 +89,5 @@ def register_request(request):
 
 def index(request):
     return render(request, "AppBlog/index.html")
-@login_required
-def profile(request):
-    
-    usuario = request.user
-    
-    if request.method == 'POST':
-        
-        form = Profile(request.POST)
-        
-        if form.is_valid():
-            
-            info = form.cleaned_data
-            
-            if info['password1'] != info['password2']:
-                datos = {
-                    'username': usuario.username,
-                    'email': usuario.email
-                }
-                
-                form = Profile(initial=datos)
-            
-            else:
-                usuario.email = info['email']
-                usuario.username = info['username']
-                usuario.set_password(info['password1'])
-                usuario.link = info['link']
-                usuario.description = info['description']
-                usuario.image = info['image']
-
-                
-            usuario.save()
-            
-            return render(request, 'AppBlog/index.html')
-    else:
-        form = Profile(initial={'email': usuario.email, 'username': usuario.username, 'link': usuario.link, 'description': usuario.description, 'image': usuario.image})
-        
-    return render(request, "AppBlog/edit.html", {"form": form})
+def about(request):
+    return render(request, "AppBlog/about.html")

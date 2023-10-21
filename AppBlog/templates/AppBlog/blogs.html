@@ -6,7 +6,6 @@
 {% for blog in object_list %}
     <ul>
         <li>Titulo: {{blog.title}}</li>
-        <li>Imagen: {{blog.image}}</li>
         <li>Dia en que se creo: {{blog.date}}</li>
         <li>
             {% if request.user.is_staff%}
