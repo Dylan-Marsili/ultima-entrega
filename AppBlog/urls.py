@@ -16,5 +16,7 @@ urlpatterns = [
     path('accounts/login/', login_request, name='login'),
     path('accounts/register/', register_request, name='register'),
     path('accounts/profile/', UsuarioEdicion.as_view(), name='profile'),
+    path('accounts/change_password/', CambioPassword.as_view(), name='change_password'),
+    path('accounts/success/', password_exitoso, name='success'),
     path('logout/', LogoutView.as_view(template_name='AppBlog/index.html'), name='logout'),
 ]

@@ -1,19 +1,18 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from .models import *
 
 
 class UserRegisterForm(UserCreationForm):
-    email = forms.EmailField()
+    username = forms.CharField(label='Usuario')
+    email = forms.EmailField(label='Email')
     password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
     password2 = forms.CharField(label="Repetir contraseña", widget=forms.PasswordInput)
-    link = forms.CharField(max_length=100)
-    description = forms.CharField(max_length=300)
  
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2', 'description', 'link']
+        fields = ['username', 'email', 'password1', 'password2']
 
 
 class Profile(UserChangeForm):
@@ -22,12 +21,11 @@ class Profile(UserChangeForm):
     password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
     password2 = forms.CharField(
         label='Repetir la contraseña', widget=forms.PasswordInput)
-    link = forms.CharField(max_length=100)
-    description = forms.CharField(max_length=300)
+
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2', 'description', 'link']
+        fields = ['username', 'email', 'password1', 'password2']
         
 class FormularioComentario(forms.ModelForm):
     class Meta:
@@ -37,3 +35,15 @@ class FormularioComentario(forms.ModelForm):
             'nombre': forms.TextInput(attrs={'class': 'form-control'}),
             'mensaje' : forms.Textarea(attrs={'class': 'form-control'}),
         }
+
+class FormularioCambioPassword(PasswordChangeForm):
+    old_password = forms.CharField(label=("Password Actual"),
+                                   widget=forms.PasswordInput(attrs={'class':'form-control'}))
+    new_password1 = forms.CharField(label=("Nuevo Password"),
+                                   widget=forms.PasswordInput(attrs={'class':'form-control'}))
+    new_password2 = forms.CharField(label=("Repita Nuevo Password"),
+                                   widget=forms.PasswordInput(attrs={'class':'form-control'}))
+
+    class Meta:
+        model = User
+        fields = ('old_password', 'new_password1', 'new_password2')

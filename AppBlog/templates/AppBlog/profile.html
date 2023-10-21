@@ -2,11 +2,12 @@
 {% load static %}
 
 {% block sections %}
-<form method="POST">{% csrf_token %}
+<form enctype="multipart/form-data" method="POST">{% csrf_token %}
 
     {{ form.as_p }}
 
     <input type="submit" value="Enviar">
 
 </form>
+<p class="text-center">Necesitas cambiar la contraseña?<a href="{% url 'change_password' %}"> Haz click acá</a></p>
 {% endblock %}

@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import LoginView, PasswordChangeView
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -66,6 +68,7 @@ class UsuarioEdicion(UpdateView):
 
     def get_object(self):
         return self.request.user
+    
 def register_request(request):
     if request.method == 'POST':
 
@@ -100,3 +103,11 @@ class ComentarioPagina(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.comentario_id = self.kwargs['pk']
         return super(ComentarioPagina, self).form_valid(form)
+
+class CambioPassword(PasswordChangeView):
+    form_class = FormularioCambioPassword
+    template_name = 'AppBlog/change_password.html'
+    success_url = reverse_lazy('success')
+
+def password_exitoso(request):
+    return render(request, 'AppBlog/password_success.html', {})
