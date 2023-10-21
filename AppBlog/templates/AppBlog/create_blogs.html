@@ -7,7 +7,7 @@
 <p>Estan mal los datos</p>
 {% endif %}
 
-<form action="" method="POST">{% csrf_token %}
+<form action="" enctype="multipart/form-data" method="POST">{% csrf_token %}
     <table>
         {{ form.as_table }}
     </table>
