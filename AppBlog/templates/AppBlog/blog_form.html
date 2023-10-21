@@ -1,0 +1,10 @@
+{% extends "AppBlog/base.html" %}
+{% load static %}
+
+{% block sections %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Actualizar">
+</form>
+{% endblock %}

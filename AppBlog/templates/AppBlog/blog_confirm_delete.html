@@ -1,0 +1,18 @@
+{% extends 'AppBlog/base.html' %}
+
+{% load static %}
+
+{% block sections %}
+    
+
+
+<form method="POST">
+    {% csrf_token %}
+    Estas seguro/a {{ object }}
+    <input type="submit" value="Borrar">
+</form>
+
+
+
+
+{% endblock sections %}
