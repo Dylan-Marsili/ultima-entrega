@@ -21,7 +21,7 @@ class BlogsListView(LoginRequiredMixin, ListView):
 class BlogsUpdateView(LoginRequiredMixin, UpdateView):
     model = Blog
     success_url = "/"
-    fields = ["title", "subtitle", "body", "date","image"]
+    fields = ["title", "subtitle", "body","image"]
 
 class BlogsDeleteView(LoginRequiredMixin, DeleteView):
     model = Blog
@@ -30,7 +30,7 @@ class BlogsCreateView(LoginRequiredMixin, CreateView):
 
     model = Blog
     template_name = "AppBlog/create_blogs.html"
-    fields = ["title", "subtitle", "body", "date","image"]
+    fields = ["title", "subtitle", "body","image"]
 
     success_url = reverse_lazy("pages")
 def login_request(request):
@@ -91,3 +91,12 @@ def index(request):
     return render(request, "AppBlog/index.html")
 def about(request):
     return render(request, "AppBlog/about.html")
+class ComentarioPagina(LoginRequiredMixin, CreateView):
+    model = Comentario
+    form_class = FormularioComentario
+    template_name = 'AppBlog/comentario.html'
+    success_url = reverse_lazy('inicio')
+
+    def form_valid(self, form):
+        form.instance.comentario_id = self.kwargs['pk']
+        return super(ComentarioPagina, self).form_valid(form)

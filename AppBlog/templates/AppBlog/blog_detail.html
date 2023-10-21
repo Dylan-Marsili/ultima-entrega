@@ -9,4 +9,22 @@ Imagen: <img src='/{{blog.image}}'>
 <p>Fecha: {{blog.date}}</p>
 
 <button type="button" class="btn btn-dark"><a href="{% url 'pages' %}">Regresar</a></button>
+
+<div class="container">
+    <h4>Comentarios...</h4>
+    <br>
+    <div class="container">
+    {% if not blog.comentarios.all %}
+        No han comentado 
+    {% else %}
+        {% for comentario in blog.comentarios.all %}
+        <p><strong>{{comentario.nombre}}</strong></p>
+        <p>{{comentario.mensaje}}</p>
+        <p><small>{{comentario.fechaComentario}}</small></p>
+        <hr>
+        {% endfor %}
+    {% endif %}
+    <a href="{% url 'comentario' blog.pk %}">Agrega un Comentario</a>
+    </div>
+</div>
 {% endblock %}
