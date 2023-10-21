@@ -7,10 +7,10 @@ class Blog(models.Model):
     body = models.CharField(max_length=1200)
     date = models.DateTimeField()
     
-    image = models.ImageField(upload_to='blog/', null=True, blank=True)
+    image = models.ImageField(upload_to='media/blog/', null=True, blank=True)
 
     def __str__(self):
-        return f"./"
+        return f"{self.title}"
 
 class Avatar(models.Model):
    

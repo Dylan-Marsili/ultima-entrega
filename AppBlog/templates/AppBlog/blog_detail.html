@@ -5,7 +5,7 @@
 <h1>Titulo: {{blog.title}}</h1>
 <h2>Subtitulo: {{blog.subtitle}}</h2>
 <p>Cuerpo: {{blog.body}}</p>
-Imagen: <img src={{blog}}>
+Imagen: <img src='/{{blog.image}}'>
 <p>Fecha: {{blog.date}}</p>
 
 <button type="button" class="btn btn-dark"><a href="{% url 'pages' %}">Regresar</a></button>

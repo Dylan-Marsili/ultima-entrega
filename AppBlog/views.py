@@ -21,7 +21,7 @@ class BlogsListView(LoginRequiredMixin, ListView):
 class BlogsUpdateView(LoginRequiredMixin, UpdateView):
     model = Blog
     success_url = "/"
-    fields = ['nombre', 'apellido', 'email']
+    fields = ["title", "subtitle", "body", "date","image"]
 
 class BlogsDeleteView(LoginRequiredMixin, DeleteView):
     model = Blog
