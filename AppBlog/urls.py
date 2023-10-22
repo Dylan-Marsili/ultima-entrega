@@ -2,8 +2,6 @@ from django.contrib import admin
 from django.urls import path, include
 from .views import *
 
-
-
 urlpatterns = [
     path("", index, name="inicio"),
     path("about/", about,  name="about"),
@@ -20,3 +18,5 @@ urlpatterns = [
     path('accounts/success/', password_exitoso, name='success'),
     path('logout/', LogoutView.as_view(template_name='AppBlog/index.html'), name='logout'),
 ]
+
+handler404 = 'AppBlog.views.handler404t'

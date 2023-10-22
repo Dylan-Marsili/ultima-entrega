@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.template import RequestContext
+
 from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.contrib.auth.forms import AuthenticationForm
@@ -9,8 +11,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LogoutView
 from django.urls import reverse_lazy
-from .forms import *
-from .models import *
+from AppBlog.forms import *
+from AppBlog.models import *
 
 class BlogsDetailView(LoginRequiredMixin, DetailView):
     model = Blog
@@ -111,3 +113,8 @@ class CambioPassword(PasswordChangeView):
 
 def password_exitoso(request):
     return render(request, 'AppBlog/password_success.html', {})
+
+def handler404t(request, *args, **argv):
+    response = render('404.html')
+    response.status_code = 404
+    return response
